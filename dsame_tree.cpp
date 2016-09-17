@@ -30,6 +30,7 @@ BTNode* createTree(int a[], int n)
 {
 	if (n<=0)
 		return NULL;
+	return NULL;
 }
 
 BTNode* createStdTree()
@@ -51,8 +52,6 @@ BTNode* createStdTree()
 	root->right->left->right = new BTNode(13);
 	root->right->right->left = new BTNode(14);
 	root->right->right->right = new BTNode(15);
-
-
 	return root;
 }
 
@@ -72,7 +71,6 @@ void inOrderTraversal_i(BTNode* root)
 {
 	cout<<"\n";
 	stack<BTNode*> s;
-	BTNode *current = root;
 	while(1)
 	{		
 		while(root)
@@ -105,7 +103,6 @@ void preOrderTraversal_i(BTNode* root)
 {
 	cout<<"\n";
 	stack<BTNode*> s;
-	BTNode *current = root;
 	while(1)
 	{		
 		while(root)
@@ -190,13 +187,65 @@ int findMax_r(BTNode* root)
 
 }
 
+int findMax_i(BTNode* root)
+{
+	if (!root)
+		return INT_MIN;
+	queue<BTNode*> q;
+	q.push(root);
+	int maximum = INT_MIN;	
+	while(!q.empty())
+	{
+		BTNode *curr = q.front();
+		q.pop();
+		if (curr)			
+		{			
+			maximum = max(maximum,curr->data);
+			q.push(curr->left);
+			q.push(curr->right);	
+		}
+	}
+	return maximum;
+}
+
+
+int levelCount(BTNode* root)
+{
+	if (!root)
+		return 0;
+	queue<BTNode*> q;
+	q.push(root);
+	q.push(NULL); //To denote end of level
+	int level=0;
+	while(!q.empty())
+	{
+		BTNode *curr = q.front();
+		q.pop();
+		if (curr)
+		{
+			if (curr->left)
+			q.push(curr->left);
+			if (curr->right)
+			q.push(curr->right);
+		}
+		//NULL node denotes end of level
+		else
+		{
+			level++;
+			if(!q.empty())
+				q.push(NULL); //insert only if q is not empty. Otherwise corner case
+		}	
+	}
+	return level;
+}
 
 
 int main(int argc, char const *argv[])
 {	
 	BTNode * root = createStdTree();	
 	cout<<"\n";
-	cout<<findMax_r(root)<<endl;
+	//cout<<findMax_r(root)<<endl;
+	cout<<levelCount(root)<<endl;
 
 	return 0;
 }
