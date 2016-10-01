@@ -54,7 +54,8 @@ public:
 		//Step 2/3: Form acyclic graph
 		vector<Edge> mstKruskal;
 		set<int> connectedComponents;
-		for (unsigned int i=0;i<edgeList.size()&&mstKruskal.size()<=V-1;i++)
+		//2nd condn is optimization to prevent checking all edges
+		for (unsigned int i=0;i<edgeList.size() && mstKruskal.size()<=V-1; i++)
 		{
 			if (insertAcyclicConnComp(connectedComponents,edgeList[i].src,edgeList[i].des))
 			mstKruskal.push_back(edgeList[i]);
