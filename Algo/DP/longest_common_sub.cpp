@@ -13,8 +13,7 @@ using namespace std;
  * In order to find lcs string then modification is
  * not straightforward
  * */
-int lcs(
-		string& s1, string& s2, int len1, int len2)
+int lcs(string& s1, string& s2, int len1, int len2)
 {
 	int res=0;
 	//obvious base case
@@ -175,7 +174,7 @@ int lcs_iter_print_optimized(const string& s1,string& s2, int len1, int len2)
 	}
 
 
-	
+
 	for (int i=0;i<s1.size();i++)
 	{
 		size_t pos = common.find(s1[i]);
@@ -203,9 +202,9 @@ int main()
 {
 	string s1 = "abcdaf";
 	string s2 = "acbcf";
-	//cout<<lcs(s1,s2,s1.size(),s2.size())<<endl;
-	//cout<<lcs_iter(s1,s2,s1.size(),s2.size())<<endl;
-	//cout<<lcs_iter_print(s1,s2,s1.size(),s2.size())<<endl;
+	cout<<lcs(s1,s2,s1.size(),s2.size())<<endl;
+	cout<<lcs_iter(s1,s2,s1.size(),s2.size())<<endl;
+	cout<<lcs_iter_print(s1,s2,s1.size(),s2.size())<<endl;
 	cout<<lcs_iter_print_optimized(s1,s2,s1.size(),s2.size())<<endl;
 	return 0;
 }
