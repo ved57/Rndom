@@ -74,12 +74,30 @@ Node* create()
 	return head;
 }
 
+//Version un-optimized
+bool has_cycle(Node* head) {
+    if (!head)
+        return false;
+    Node* slow_curr = head;
+    Node* fast_curr = head->next;
+    while (slow_curr&&fast_curr){
+        if (slow_curr == fast_curr)
+            return true;
+        slow_curr = slow_curr->next;
+        if (fast_curr->next)
+            fast_curr = fast_curr->next->next;
+        else 
+            return false;
+    }
+    return false;
+}
+
 int main()
 {
 	Node* head = create();
 	print(head);
 	insert(&head,18,END);
 	insert(&head,20,MIDDLE,head->next->next);
-	print(head);
+	print(head);	
 	return 0;
 }
