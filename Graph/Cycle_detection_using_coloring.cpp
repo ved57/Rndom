@@ -88,6 +88,29 @@ public:
 		vecColor[i]= BLACK;
 		return false;
 	}
+	bool DFS_for_detecting_cycle_iter(int i){
+		stack<int> dfs_stack;
+		dfs_stack.push(i);
+		while(!dfs_stack.empty()){
+			int curr = dfs_stack.top();
+			vecColor[curr]=GRAY;
+			dfs_stack.pop();
+			list<int>::iterator it;
+			//cout<<"\n Visiting "<<curr;
+			for (it = adjList[curr].begin();it!=adjList[curr].end();it++){
+				//cout<<"\n Checking neighbour "<<*it<<"color is "<<vecColor[*it];
+				if (vecColor[*it]==GRAY){
+					return true;
+				}
+				else if (vecColor[*it]==WHITE){
+					dfs_stack.push(*it);
+					//cout<<"\n Pushing neighbour "<<*it;
+				}
+			}
+		}
+		vecColor[i] = BLACK;
+		return false;
+	}
 
 };
 
